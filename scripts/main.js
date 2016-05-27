@@ -11,16 +11,23 @@ App
 class App extends React.Component {
     render(){
         return(
+          <div>
             <div className="app_div"> 
                 <Navbar />
                 <ControlledCarousel className="carousel"/>
                 <Pillars />
                 <About />
             </div>
+            <Contact />
+          </div>
         )
     }
 };
 
+
+/*
+  About
+*/
 
 class About extends React.Component {
 
@@ -33,6 +40,23 @@ class About extends React.Component {
   }
 };
 
+
+/*
+  Contact
+*/
+
+class Contact extends React.Component {
+  render() {
+    return(
+      <div className="contact">CONTACT</div>
+    )
+  }
+
+};
+
+/*
+  Pillars
+*/
 
 class Pillars extends React.Component {
 
@@ -117,7 +141,6 @@ const ControlledCarousel = React.createClass({
   }
 });
 
-
 /*
     Navbar
     <navbar />
@@ -130,9 +153,56 @@ class Navbar extends React.Component {
     }
 
     moveToAbout(){
-      document.getElementById('abpge').scrollIntoView({block: "end", behavior: "smooth"});
-      document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
+      //document.getElementById('abpge').scrollIntoView({block: "end", behavior: "smooth"});
+      //document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
+      if(window.scrollY<800) {
+        var scrollTimer = setInterval(function() {
+          var speed = 1;
+          var current = window.scrollY;
+
+          if(current<800){
+            speed=speed*50;
+            window.scrollTo(0, current + speed);
+          }
+          else {
+            clearInterval(scrollTimer);
+          }
+        }, 16);
+      }
+
+      else if(window.scrollY>800){
+        var scrollTimer = setInterval(function() {
+          var speed = 1;
+          var current = window.scrollY;
+
+          if(current>850){
+            speed=speed*50;
+            window.scrollTo(0, current - speed);
+          }
+          else {
+            clearInterval(scrollTimer);
+          }
+        }, 16);
+      }
     }
+
+    moveToContact(){
+
+      var scrollTimer = setInterval(function() {
+        var speed = 1;
+        var current = window.scrollY;
+
+        if(current<1300){
+          speed=speed*50;
+          window.scrollTo(0, current + speed);
+        }
+        else {
+          clearInterval(scrollTimer);
+          window.scrollTo(0, document.body.scrollHeight);
+        }
+      }, 16);
+    }
+
 
     moveToTop(){
       window.scrollTo(0, 0);
@@ -151,10 +221,10 @@ class Navbar extends React.Component {
                             <a onClick={ this.moveToAbout }>About</a>
                         </li>
                         <li>
-                            <a>CV</a>
+                            <a href="https://www.linkedin.com/in/anna-vilson-lantz-92aa28?authType=NAME_SEARCH&authToken=nnec&locale=sv_SE&trk=tyah&trkInfo=clickedVertical%3Amynetwork%2CentityType%3AentityHistoryName%2CclickedEntityId%3Amynetwork_2544946%2Cidx%3A0">CV</a>
                         </li>
                         <li>
-                            <a>Contact</a>
+                            <a onClick={ this.moveToContact }>Contact</a>
                         </li>
 
                         <li>
