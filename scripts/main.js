@@ -12,9 +12,9 @@ class App extends React.Component {
     render(){
         return(
           <div>
-            <div className="app_div"> 
+            <div className="appdiv"> 
                 <Navbar />
-                <ControlledCarousel className="carousel"/>
+                <ControlledCarousel />
                 <Pillars />
                 <About />
             </div>
@@ -34,7 +34,16 @@ class About extends React.Component {
   render(){
     return(
       <div id="abpge" className="about_page">
-        <h1>ABOUT</h1>
+        <div className="perinfo">
+          <h1>About Anna</h1>
+          <p>
+            Anna Vilson Lantz, lawyer and senior consultant, provides compliance and risk services to banks and 
+            other financial institutions (securities services, AML/CTF, credits, Code of conduct, GL44, Swedish FSA 
+            issues and authorizations etc.). Anna also has long experience in change management, training and 
+            communication and is a skilful negotiator and customer relations manager.
+          </p>
+        </div>
+        <img src="/build/css/images/portrait.jpg"></img>
       </div>
     )
   }
@@ -114,7 +123,7 @@ const ControlledCarousel = React.createClass({
 
   render() {
     return (
-      <Carousel>
+      <Carousel className="carousel">
         <Carousel.Item>
           <img width={900} height={250} alt="900x500" src="/build/css/images/pexels-photo.jpg"/>
           <Carousel.Caption>
@@ -154,11 +163,13 @@ class Navbar extends React.Component {
 
     moveToAbout(){
       //document.getElementById('abpge').scrollIntoView({block: "end", behavior: "smooth"});
-      //document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
+      document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
       if(window.scrollY<800) {
         var scrollTimer = setInterval(function() {
           var speed = 1;
           var current = window.scrollY;
+          //FIX THIS! \/!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+          console.log(document.getElementById("abpge").scrollTop);
 
           if(current<800){
             speed=speed*50;
@@ -170,7 +181,7 @@ class Navbar extends React.Component {
         }, 16);
       }
 
-      else if(window.scrollY>800){
+      else if(window.scrollY>850){
         var scrollTimer = setInterval(function() {
           var speed = 1;
           var current = window.scrollY;
@@ -187,12 +198,12 @@ class Navbar extends React.Component {
     }
 
     moveToContact(){
-
+      document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
       var scrollTimer = setInterval(function() {
         var speed = 1;
         var current = window.scrollY;
 
-        if(current<1300){
+        if(current<1000){
           speed=speed*50;
           window.scrollTo(0, current + speed);
         }
@@ -205,14 +216,26 @@ class Navbar extends React.Component {
 
 
     moveToTop(){
-      window.scrollTo(0, 0);
+      var scrollTimer = setInterval(function() {
+        var speed = 1;
+        var current = window.scrollY;
+
+        if(current>0){
+          speed=speed*50;
+          window.scrollTo(0, current - speed);
+        }
+        else {
+          clearInterval(scrollTimer);
+          window.scrollTo(0, 0);
+        }
+      }, 16);
     }
 
     render(){
         return(
             <div className="nav">
-                <h1>Anna Vilson Lantz</h1>
                 <nav className="menu">
+                  <h1>Anna Vilson Lantz</h1>
                     <ul className="topnav">
                         <li>
                             <a onClick={ this.moveToTop }>Home</a>
