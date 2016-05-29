@@ -1,25 +1,18 @@
-FROM node:5.6
-WORKDIR /usr/local/lib/node_modules/npm
-RUN npm install --save fs-extra
-RUN sed -i s/graceful-fs/fs-extra/g /usr/local/lib/node_modules/npm/lib/utils/rename.js
-RUN sed -i s/fs.rename/fs.move/g /usr/local/lib/node_modules/npm/lib/utils/rename.js
+FROM ubuntu:14.04
 
-RUN mkdir workspots
+RUN apt-get update
 
-COPY package.json /workspots/
+RUN apt-get install -y nodejs npm
 
-RUN cd /workspots/
+RUN mkdir alexanto
 
-WORKDIR /workspots/
+COPY package.json /alexanto/
 
-RUN npm install
+RUN cd /alexanto/
 
-COPY . /workspots/
+WORKDIR /alexanto/
 
-RUN npm install -g gulp
+RUN npm install express
 
-RUN npm install gulp
+COPY . /alexanto/
 
-RUN gulp css
-
-RUN gulp scripts

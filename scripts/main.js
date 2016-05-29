@@ -36,8 +36,9 @@ class About extends React.Component {
       <div id="abpge" className="about_page">
         <div className="perinfo">
           <h1>About Anna</h1>
+          <hr/>
           <p>
-            Anna Vilson Lantz, lawyer and senior consultant, provides compliance and risk services to banks and 
+            Anna Vilson Lantz, lawyer and senior consultant. She provides compliance and risk services to banks and 
             other financial institutions (securities services, AML/CTF, credits, Code of conduct, GL44, Swedish FSA 
             issues and authorizations etc.). Anna also has long experience in change management, training and 
             communication and is a skilful negotiator and customer relations manager.
@@ -57,7 +58,16 @@ class About extends React.Component {
 class Contact extends React.Component {
   render() {
     return(
-      <div className="contact">CONTACT</div>
+      <div className="contact">
+        <h1>Contact</h1>
+        <h2>Information</h2>
+        <hr/>
+        <p>
+          Phone: +46 72 354 30 35 <br/>
+          Email: anna@alexanto.se
+        </p>
+        <h3>Alexanto © 2016 All Rights Reserved</h3>
+      </div>
     )
   }
 
@@ -73,7 +83,7 @@ class Pillars extends React.Component {
     return(
       <div className='pillars'>
         <section>
-          <img src="/build/css/images/chess.jpg"></img>
+          <img src="/build/css/images/legal.png"></img>
           <h1>Legal</h1>
           <hr/>
           <p>
@@ -82,8 +92,8 @@ class Pillars extends React.Component {
           </p>
         </section>
         <section>
-          <img src="/build/css/images/chess.jpg"></img>
-          <h1>Compience</h1>
+          <img src="/build/css/images/compli.png"></img>
+          <h1>Compliance</h1>
           <hr/>
           <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
@@ -91,7 +101,7 @@ class Pillars extends React.Component {
           </p>
         </section>
         <section>
-          <img src="/build/css/images/chess.jpg"></img>
+          <img src="/build/css/images/manag.png"></img>
           <h1>Management</h1>
           <hr/>
           <p>
@@ -125,24 +135,17 @@ const ControlledCarousel = React.createClass({
     return (
       <Carousel className="carousel">
         <Carousel.Item>
-          <img width={900} height={250} alt="900x500" src="/build/css/images/pexels-photo.jpg"/>
+          <img width={900} height={500} alt="900x500" src="/build/css/images/workspace.jpg"/>
           <Carousel.Caption>
-            <h3>Legal services</h3>
-            <p>Legal services for coorperations</p>
+            <h3></h3>
+            <p></p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <img width={900} height={500} alt="900x500" src="/build/css/images/pexels-photo.jpg"/>
           <Carousel.Caption>
-            <h3>Complience</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img width={900} height={500} alt="900x500" src="/build/css/images/pexels-photo.jpg"/>
-          <Carousel.Caption>
-            <h3>Business Management</h3>
-            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+            <h3></h3>
+            <p></p>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
@@ -166,13 +169,13 @@ class Navbar extends React.Component {
       document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
       if(window.scrollY<800) {
         var scrollTimer = setInterval(function() {
-          var speed = 1;
+          var speed = 2;
           var current = window.scrollY;
           //FIX THIS! \/!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
           console.log(document.getElementById("abpge").scrollTop);
 
-          if(current<800){
-            speed=speed*50;
+          if(current<950){
+            speed=speed*25;
             window.scrollTo(0, current + speed);
           }
           else {
@@ -186,7 +189,7 @@ class Navbar extends React.Component {
           var speed = 1;
           var current = window.scrollY;
 
-          if(current>850){
+          if(current>950){
             speed=speed*50;
             window.scrollTo(0, current - speed);
           }
@@ -203,7 +206,7 @@ class Navbar extends React.Component {
         var speed = 1;
         var current = window.scrollY;
 
-        if(current<1000){
+        if(current<1200){
           speed=speed*50;
           window.scrollTo(0, current + speed);
         }
@@ -268,9 +271,17 @@ Not found
 
 class NotFound extends React.Component {
     render(){
-        return <h1>THIS IS YOUR FAULT</h1>
+        return <h1>TPage not found!</h1>
     }
 };
+
+class Picker extends React.Component {
+  render(){
+    return(
+      <h1>Welcome</h1>
+    )
+  }
+}
 
 /*
 Routes
@@ -278,7 +289,8 @@ Routes
 
 var routes = (
     <Router history={browserHistory}>
-        <Route path="/" component={App}/>
+        <Route path="/" component={Picker}/>
+        <Route path="/anna" component={App}/>
         <Route path="*" component={NotFound}/>
     </Router>
 )
